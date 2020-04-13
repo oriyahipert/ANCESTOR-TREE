@@ -29,7 +29,7 @@ CHECK(T1.relation("Noa") == string("me"));
 }
 
 
-TEST_CASE("root of oriya") {
+TEST_CASE("root of or") {
     Tree T ("Or");
     T.addFather("Or", "Hila");
     T.addMother("Or", "Tomer");
@@ -108,10 +108,30 @@ CHECK(T2.relation("Rivka") == string("great-grandmother"));
 CHECK(T2.relation("Rachel") == string("great-great-grandmother"));
 CHECK(T2.relation("Sarah") == string("unrelated"));
 CHECK(T2.relation("Levi") == string("me"));
-
-
 }
 
-
-
+TEST_CASE("root of Miri") {
+    Tree T3 ("Miri");
+    T3.addFather("Miri", "Avi");
+    T3.addMother("Miri", "Chen");
+    T3.addMother("Chen", "Nava");
+    T3.addFather("Chen", "Ido");
+    T3.addFather("Ido", "Israel");
+    T3.addMother("Ido", "Ita");
+    T3.addFather("Ita", "Yosef");
+    T3.addMother("Ita", "Rivka");
+    T3.addFather("Yosef", "Nathan");
+    CHECK(T3.relation("Avi") == string("father"));
+    CHECK(T3.relation("Chen") == string("mother"));
+    CHECK(T3.relation("Ido") == string("grandfather"));
+    CHECK(T3.relation("Nava") == string("grandmother"));
+    CHECK(T3.relation("Israel") == string("grandfather"));
+    CHECK(T3.relation("Ita") == string("grandmother"));
+    CHECK(T3.relation("Yosef") == string("great-grandfather"));
+    CHECK(T3.relation("Rivka") == string("great-grandmother"));
+    CHECK(T3.relation("Nathan") == string("great-great-grandfather"));
+    CHECK(T3.relation("Hava") == string("unrelated"));
+    CHECK(T3.relation("Or") == string("unrelated"));
+    CHECK(T3.relation("Miri") == string("me"));
+}
 
