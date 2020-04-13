@@ -29,19 +29,39 @@ CHECK(T1.relation("Noa") == string("me"));
 }
 
 
-// TEST_CASE("relation") {
-//     family::Tree T ("Or");
-//     T.addFather("Or", "Hila")
-//     .addMather("Or", "Tomer")
-//     .addMather("Hila", "Ayala")
-//     .addFather("Hila", "Amit")
-//     .addFather("Tomer", "Yosef")
-//     .addMather("Tomer", "Rivka")
-//     .addFather("Yosef", "Levi");
-//    // CHECK();
-   
+TEST_CASE("root of oriya") {
+    Tree T ("Or");
+    T.addFather("Or", "Hila");
+    T.addMother("Or", "Tomer");
+    T.addMother("Hila", "Ayala");
+    T.addFather("Hila", "Amit");
+    T.addFather("Tomer", "Yosef");
+    T.addMother("Tomer", "Rivka");
+    T.addFather("Yosef", "Levi");
+    T.addFather("Yosef", "Ora");
+    CHECK(T.relation("Tomer") == string("father"));
+    CHECK(T.relation("Hila") == string("mother"));
+    CHECK(T.relation("Yosef") == string("grandfather"));
+    CHECK(T.relation("Rivka") == string("grandmother"));
+    CHECK(T.relation("Amit") == string("grandfather"));
+    CHECK(T.relation("Ayala") == string("grandmother"));
+    CHECK(T.relation("Levi") == string("great-grandfather"));
+    CHECK(T.relation("Ora") == string("great-grandmother"));
+    CHECK(T.relation("Hava") == string("unrelated"));
+    CHECK(T.relation("Miri") == string("unrelated"));
 
+    bool exceptionThrown = false;
+    //string text = "uncle";
+    try
+    {
+        T.find("uncle");
+    }
+    catch(const exception &e) 
+    {   
+        exceptionThrown = true;
+    }
+    CHECK(exceptionThrown);
 
-// }
+}
 
 
