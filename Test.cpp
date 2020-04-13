@@ -62,6 +62,56 @@ TEST_CASE("root of oriya") {
     }
     CHECK(exceptionThrown);
 
+ bool exceptionThrown1 = false;
+    try
+    {
+        T.find("sister");
+    }
+    catch(const exception &e) 
+    {   
+        exceptionThrown1 = true;
+    }
+    CHECK(exceptionThrown);
+
+
+ bool exceptionThrown2 = false;
+    try
+    {
+        T.find("aunt");
+    }
+    catch(const exception &e) 
+    {   
+        exceptionThrown2 = true;
+    }
+    CHECK(exceptionThrown);
 }
+
+TEST_CASE("root is Levi"){
+Tree T2 ("Levi");
+T2.addFather("Levi" , "Yuval");
+T2.addMother("Levi" ,"Adi");
+T2.addFather("Yuval" , "Mor");
+T2.addMother("Yuval" , "Sapir");
+T2.addFather("Adi" , "Miki");
+T2.addMother("Adi" , "Roni");
+T2.addFather("Mor", "Yoni");
+T2.addMother("Mor" , "Rivka");
+T2.addMother("Rivka", "Rachel");
+CHECK(T2.relation("Yoval") == string("father"));
+CHECK(T2.relation("Adi") == string("mother"));
+CHECK(T2.relation("Mor") == string("grandfather"));
+CHECK(T2.relation("Sapir") == string("grandmother"));
+CHECK(T2.relation("Miki") == string("grandfather"));
+CHECK(T2.relation("Roni") == string("grandmother"));
+CHECK(T2.relation("Yoni") == string("great-grandfather"));
+CHECK(T2.relation("Rivka") == string("great-grandmother"));
+CHECK(T2.relation("Rachel") == string("great-great-grandmother"));
+CHECK(T2.relation("Sarah") == string("unrelated"));
+CHECK(T2.relation("Levi") == string("me"));
+
+
+}
+
+
 
 
