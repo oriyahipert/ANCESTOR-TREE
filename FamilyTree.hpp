@@ -14,10 +14,14 @@ public:
    void addM(Node* child, string name, string mother,int a,int b);
    Tree& addMother(string child, string mother);
    string relation (string name);
-   string relationHelp(string name, Node* root);
+   void relationHelp(string name, Node* root , int* level , int* gender);
    string find (string relate);
-   string findHelp(string name, Node* root);
+   void findHelp(string name, Node* root , string* tag);
    void display();
+   void printPreorder(Node* root);
    void remove (string name);
+   void removeHelp(string name , Node* root);
+   void deleteTree(Node* root);
+   Node* search(Node* root, string name);
 };
 }
