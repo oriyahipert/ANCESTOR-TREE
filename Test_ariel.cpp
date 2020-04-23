@@ -37,7 +37,7 @@ TEST_CASE("Yosef Tree case") {
 	CHECK_THROWS(T.addFather("Avraham", "Avraham"));    // duplicate father
 	CHECK_THROWS(T.addMother("Avraham", "Sara"));       // duplicate mother
 	 
-	Relation test case
+	//Relation test case
 	CHECK(T.relation("Yaakov") == string("father"));
 	CHECK(T.relation("Rachel") == string("mother"));
 	CHECK(T.relation("Isaac") == string("grandfather"));
@@ -76,8 +76,8 @@ TEST_CASE("Yosef Tree case") {
 	CHECK_THROWS(T.find("great?grandmother"));
 	CHECK_THROWS(T.find("great grandmother"));
 
-	Remove test case
-	//CHECK_THROWS(T.remove("Yosef"));  // removing the root is an error
+	//Remove test case
+	CHECK_THROWS(T.remove("Yosef"));  // removing the root is an error
 	CHECK_THROWS(T.remove(" "));      // removing a non-existent person
 	CHECK_THROWS(T.remove("xyz"));
 	CHECK_THROWS(T.remove("Ariel"));
