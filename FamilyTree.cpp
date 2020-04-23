@@ -161,8 +161,8 @@ string Tree::find(string name)
     if(root != NULL && name=="me"){return root->getName();}
     if((root->getFather() != NULL) && (name == "father")){return root->getFather()->getName();}
     if((root->getMother() != NULL) && (name == "mother")){return root->getMother()->getName();}
-    if ((root->getMother()->getMother() != NULL) && (name == "grandmother")){return root->getMother()->getMother()->getName();}
-    if((root->getFather()->getFather() != NULL) && (name=="grandfather")){return root->getFather()->getFather()->getName();}
+    if ((root->getMother() != NULL) && (root->getMother()->getMother() != NULL) && (name == "grandmother")){return root->getMother()->getMother()->getName();}
+    if((root->getFather() != NULL) && (root->getFather()->getFather() != NULL) && (name=="grandfather")){return root->getFather()->getFather()->getName();}
     string tag = "";
     findHelp(name, root , &tag);
     if(tag == "")
@@ -235,13 +235,14 @@ void Tree::removeHelp(string name , Node* root)
     if(root->getFather() != NULL && root->getFather()->getName() == name)
     {
         deleteTree(root->getFather());
-        // root->setFather(root);
+        root->removeFather();
         return;
     }
     else if(root->getMother() != NULL && root->getMother()->getName() == name)
     {
         deleteTree(root->getMother());
-        // root->setMother(root);
+      //   root->setMother(NULL);
+       root->removeMother();
         return;
     }
     else
@@ -265,16 +266,14 @@ void Tree::deleteTree(Node* root) //this function was taken from "GeeksForGeeks"
     {
         if(root->getFather() != NULL)
         {
-            deleteTree(root->getFather()); 
+          root->removeFather();
         }
         if(root->getMother() != NULL)
         {
-            deleteTree(root->getMother());
+           // deleteTree(root->getMother());
+           root->removeMother();
         }
-        if(root->getFather() != NULL && root->getMother() != NULL)
-        {
-            delete root; 
-        }
+   
     }
     }
 }

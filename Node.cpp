@@ -1,6 +1,7 @@
 #include "Node.hpp"
-Node::Node(string name): name(name), father(NULL), mother(NULL),level(0),gender(-1) {
+Node::Node(string name): name(name), father(NULL), mother(NULL),level(-1),gender(-1),tag(0) {
 }
+
   string Node::getName(){
       return this->name;
   }
@@ -16,11 +17,23 @@ Node::Node(string name): name(name), father(NULL), mother(NULL),level(0),gender(
     int Node:: getGender(){
         return this->gender;
     }
+    int Node:: getTag(){
+        return this->tag;
+    }
+    void Node:: setFather(Node* n){
+        this->father = n;
+    }
+    void Node::setMother(Node* n){
+        this->mother = n;
+    }
     void Node:: setLevel(int l){
         this->level=l;
     }
     void Node:: setGender(int g){
         this->gender=g;
+    }
+    void Node:: setTag(int t){
+        this->tag=t;
     }
  void Node::addFatherNode (string father){
      this->father= new Node(father);
@@ -33,6 +46,7 @@ Node::Node(string name): name(name), father(NULL), mother(NULL),level(0),gender(
         this->father=NULL;
     }
     void Node::removeMother (){
+        delete(this->mother);
         this->mother=NULL;
     }
     Node::~Node(){
