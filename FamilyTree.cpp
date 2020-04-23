@@ -220,7 +220,7 @@ void Tree::remove(string name){
             throw("you cant delete the root");
         }
        // Node* temp = search(root,name);
-        if ( search(root,name) == NULL)
+        if (search(root,name) == NULL)
         {
             throw("this name is not exist");
         }
@@ -230,23 +230,19 @@ void Tree::remove(string name){
         }
 }
 
-
-void Tree::deleteTree(Node* root) //this function was taken from "GeeksForGeeks", https://www.geeksforgeeks.org/write-a-c-program-to-delete-a-tree/
-{
-    if(root != NULL)
-    {
-        deleteTree(root->getFather()); 
-        deleteTree(root->getMother());
-        delete root; 
-        root = NULL;
-    }
-}
-
 void Tree::removeHelp(string name , Node* root)
 {
-    if(root != NULL && root->getName() == name)
+    if(root->getFather() != NULL && root->getFather()->getName() == name)
     {
-        deleteTree(root);
+        deleteTree(root->getFather());
+        // root->setFather(root);
+        return;
+    }
+    else if(root->getMother() != NULL && root->getMother()->getName() == name)
+    {
+        deleteTree(root->getMother());
+        // root->setMother(root);
+        return;
     }
     else
     {
@@ -258,6 +254,28 @@ void Tree::removeHelp(string name , Node* root)
         {
             removeHelp(name , root->getMother());
         }
+    }
+}
+
+void Tree::deleteTree(Node* root) //this function was taken from "GeeksForGeeks", https://www.geeksforgeeks.org/write-a-c-program-to-delete-a-tree/
+{
+    if(root != NULL)
+    {
+        if(root != NULL)
+    {
+        if(root->getFather() != NULL)
+        {
+            deleteTree(root->getFather()); 
+        }
+        if(root->getMother() != NULL)
+        {
+            deleteTree(root->getMother());
+        }
+        if(root->getFather() != NULL && root->getMother() != NULL)
+        {
+            delete root; 
+        }
+    }
     }
 }
 
